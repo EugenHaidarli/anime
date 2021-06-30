@@ -17,7 +17,7 @@ class Anime(models.Model):
     cover = FilePathField()
 
 class Comment(models.Model):
-    anime = ForeignKey(Anime, on_delete=models.CASCADE, related_name='animes')
+    anime = ForeignKey(Anime, on_delete=models.CASCADE, related_name='comments')
     owner = models.ForeignKey( 
         settings.AUTH_USER_MODEL, 
         null=True, 
@@ -27,7 +27,7 @@ class Comment(models.Model):
     content = models.TextField(max_length=1000, blank=True)
 
 class Rating(models.Model):
-    anime = ForeignKey(Anime, on_delete=models.CASCADE, related_name='anime')
+    anime = ForeignKey(Anime, on_delete=models.CASCADE, related_name='ratings')
     owner = models.ForeignKey( 
         settings.AUTH_USER_MODEL, 
         null=True, 
