@@ -9,7 +9,8 @@ class Anime(models.Model):
     owner = models.ForeignKey( 
         settings.AUTH_USER_MODEL, 
         null=True, 
-        on_delete=models.SET_NULL 
+        on_delete=models.SET_NULL ,
+        related_name='animes'
     )
     # country_of_origin = CountryField("Country of origin", blank=True)
     is_series = BooleanField(default=True)
@@ -21,7 +22,8 @@ class Comment(models.Model):
     owner = models.ForeignKey( 
         settings.AUTH_USER_MODEL, 
         null=True, 
-        on_delete=models.SET_NULL 
+        on_delete=models.SET_NULL,
+        related_name='comments' 
     )
     time = models.TimeField(auto_now_add=True)
     content = models.TextField(max_length=1000, blank=True)
@@ -31,7 +33,8 @@ class Rating(models.Model):
     owner = models.ForeignKey( 
         settings.AUTH_USER_MODEL, 
         null=True, 
-        on_delete=models.SET_NULL 
+        on_delete=models.SET_NULL,
+        related_name='ratings' 
     )
 
     class RatingChoice(models.TextChoices):
