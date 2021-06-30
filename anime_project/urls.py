@@ -7,7 +7,8 @@ from anime import views
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
 router.register(r'anime', views.AnimeViewSet)
-# router.register(r'users', views.UserViewSet)
+router.register(r'users', views.UserViewSet)
+router.register(r'comment', views.CommentViewSet)
 
 
 urlpatterns = [
