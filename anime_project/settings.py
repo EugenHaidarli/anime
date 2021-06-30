@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'django_countries',
-    'anime.apps.AnimeConfig'
-    'users.apps.UsersConfig'
+    'anime.apps.AnimeConfig',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
