@@ -13,6 +13,9 @@ class AnimeViewSet(viewsets.ModelViewSet):
     serializer_class = AnimeSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -26,9 +29,24 @@ class UserViewSet(viewsets.ModelViewSet):
 
 class CommentViewSet(viewsets.ModelViewSet):
     """
-    Comment viewset
+    Anime Comments viewset
     """
 
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+class RatingViewSet(viewsets.ModelViewSet):
+    """
+    Anime Ratings viewset
+    """
+
+    queryset = Rating.objects.all()
+    serializer_class = RatingSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
