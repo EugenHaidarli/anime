@@ -67,7 +67,8 @@ class AnimeSerializer(serializers.ModelSerializer):
     ratings = RatingSerializer(read_only=True, many=True)
     comments = CommentSerializer(read_only=True, many=True)
     owner = UserAnimeSerializer(read_only=True)
+    cover = serializers.ImageField()
 
     class Meta:
         model = Anime
-        fields = ['id', 'name', 'owner', 'is_series', 'episodes', 'comments', 'ratings']
+        fields = ['id', 'name', 'owner', 'is_series', 'episodes', 'cover', 'comments', 'ratings']
