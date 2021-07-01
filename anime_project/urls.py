@@ -9,7 +9,7 @@ router = DefaultRouter()
 router.register(r'anime', views.AnimeViewSet)
 router.register(r'users', views.UserViewSet)
 router.register(r'comment', views.CommentViewSet)
-
+router.register(r'rating', views.RatingViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
