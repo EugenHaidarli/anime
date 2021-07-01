@@ -16,7 +16,7 @@ class Anime(models.Model):
     # country_of_origin = CountryField("Country of origin", blank=True)
     is_series = BooleanField(default=True)
     episodes = IntegerField(blank=True)
-    cover = ImageField()
+    cover = ImageField(upload_to='uploads/') #doesnt work for some reason
 
 class Comment(models.Model):
     anime = ForeignKey(Anime, on_delete=models.CASCADE, related_name='comments')
