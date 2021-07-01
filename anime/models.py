@@ -3,6 +3,7 @@ from django.db.models.fields import BooleanField, CharField, FilePathField, Inte
 from django.db.models.fields.related import ForeignKey
 from django_countries.fields import CountryField
 from django.conf import settings
+from rest_framework.fields import FileField, ImageField
 
 class Anime(models.Model):
     name = CharField(max_length=100)
@@ -15,7 +16,7 @@ class Anime(models.Model):
     # country_of_origin = CountryField("Country of origin", blank=True)
     is_series = BooleanField(default=True)
     episodes = IntegerField(blank=True)
-    cover = FilePathField()
+    cover = ImageField()
 
 class Comment(models.Model):
     anime = ForeignKey(Anime, on_delete=models.CASCADE, related_name='comments')
