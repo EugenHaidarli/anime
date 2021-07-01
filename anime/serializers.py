@@ -67,8 +67,11 @@ class AnimeSerializer(serializers.ModelSerializer):
     ratings = RatingSerializer(read_only=True, many=True)
     comments = CommentSerializer(read_only=True, many=True)
     owner = UserAnimeSerializer(read_only=True)
-    cover = serializers.ImageField()
+    cover = serializers.ImageField() # gotta research more about using imagefield
 
     class Meta:
         model = Anime
-        fields = ['id', 'name', 'owner', 'is_series', 'episodes', 'cover', 'comments', 'ratings']
+        if Anime.is_series == True:
+            exclude = ['episodes']
+        else:
+            fields = ['id', 'name', 'owner', 'is_series', 'episodes', 'cover', 'comments', 'ratings']
