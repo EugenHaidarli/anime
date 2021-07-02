@@ -51,27 +51,26 @@ class RatingSerializer(serializers.ModelSerializer):
         fields = ['id', 'anime', 'owner', 'score']
 
 
-class UserSerializer(serializers.ModelSerializer):
-    comments = CommentSerializer(read_only = True, many=True)
-    ratings = RatingSerializer(read_only=True, many=True)
-    # animes = AnimeSerializer(read_only=True, many=True)
-
-    class Meta:
-        model = CustomUser
-        fields = ['id', 'email', 'animes', 'comments', 'ratings']
-
-
-
-
 class AnimeSerializer(serializers.ModelSerializer):
     ratings = RatingSerializer(read_only=True, many=True)
     comments = CommentSerializer(read_only=True, many=True)
     owner = UserAnimeSerializer(read_only=True)
-    cover = serializers.ImageField() # gotta research more about using imagefield
+    # cover = serializers.ImageField() # gotta research more about using imagefield
 
     class Meta:
         model = Anime
-        if Anime.is_series == True:
+        if Anime.is_series == True: # it doesnt work, gotta figure if Anime.is_series returns the correct value
             exclude = ['episodes']
         else:
-            fields = ['id', 'name', 'owner', 'is_series', 'episodes', 'cover', 'comments', 'ratings']
+            fields = ['id', 'name', 'owner', 'is_series', 'episodes', 'comments', 'ratings']
+
+
+class UserSerializer(serializers.ModelSerializer):
+    comments = CommentSerializer(read_only = True, many=True)
+    ratings = RatingSerializer(read_only=True, many=True)
+    animes = AnimeSerializer(read_only=True, many=True)
+    
+
+    class Meta:
+        model = CustomUser
+        fields = ['id', 'email', 'watched_list', 'animes', 'comments', 'ratings']
