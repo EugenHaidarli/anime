@@ -15,8 +15,11 @@ class Anime(models.Model):
     )
     # country_of_origin = CountryField("Country of origin", blank=True)
     is_series = BooleanField(default=True)
-    episodes = IntegerField(blank=True)
-    cover = ImageField(upload_to='uploads/') #doesnt work for some reason
+    episodes = IntegerField(null=True)
+    # cover = ImageField(upload_to='uploads/') #doesnt work for some reason
+
+    def __str__(self):
+        return self.name
 
 class Comment(models.Model):
     anime = ForeignKey(Anime, on_delete=models.CASCADE, related_name='comments')
@@ -28,6 +31,9 @@ class Comment(models.Model):
     )
     time = models.TimeField(auto_now_add=True)
     content = models.TextField(max_length=1000, blank=True)
+
+    def __str__(self):
+        return self.content
 
 class Rating(models.Model):
     anime = ForeignKey(Anime, on_delete=models.CASCADE, related_name='ratings')
@@ -47,3 +53,6 @@ class Rating(models.Model):
         MASTERPIECE = "masterpiece", "Masterpiece"
 
     score = models.CharField("Anime Score",max_length=20, choices=RatingChoice.choices, default=RatingChoice.UNSPECIFIED)
+
+    def __str__(self):
+        return self.score
