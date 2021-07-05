@@ -3,11 +3,12 @@ from .models import Anime, Comment, Rating
 from .serializers import AnimeSerializer, CommentSerializer, RatingSerializer, UserSerializer
 from rest_framework import permissions
 from users.models import CustomUser
+from rest_framework.exceptions import PermissionDenied
+from django.http import HttpResponseBadRequest
 
 class AnimeViewSet(viewsets.ModelViewSet):
     """
-    This viewset automatically provides `list`, `create`, `retrieve`,
-    `update` and `destroy` actions.
+    Anime viewset
     """
     queryset = Anime.objects.all()
     serializer_class = AnimeSerializer
@@ -16,6 +17,8 @@ class AnimeViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
+    def destroy(self, request, *args, **kwargs):
+        return HttpResponseBadRequest("We dont delete art around this parts >:(")
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -50,3 +53,5 @@ class RatingViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+
