@@ -16,7 +16,7 @@ class Anime(models.Model):
     # country_of_origin = CountryField("Country of origin", blank=True)
     is_series = BooleanField(default=True)
     episodes = IntegerField(null=True)
-    # cover = ImageField(upload_to='uploads/') #doesnt work for some reason
+    cover = models.ImageField(null=True, blank=True)
 
     def __str__(self):
         return self.name
