@@ -59,7 +59,7 @@ class AnimeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Anime
-        fields = ['id', 'name', 'owner', 'is_series', 'episodes', 'cover', 'comments', 'ratings']
+        fields = ['id', 'name', 'owner', 'is_series', 'episodes', 'country_of_origin', 'time', 'cover', 'comments', 'ratings']
 
 
 class UserSerializer(serializers.ModelSerializer):
