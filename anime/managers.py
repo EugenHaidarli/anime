@@ -9,7 +9,7 @@ class AnimeQuerySet(models.QuerySet):
         return self.filter(country_of_origin=country)
 
     def get_top_anime(self):
-        return self.all().annotate(rating = Count('ratings__score')).order_by('-rating')
+        return self.all().annotate(rating = Count('ratings__score')).order_by('-rating') #gives the anime with most ratings, cant figure how to give with the specific "masterpiece" rating
 
 class AnimeManager(models.Manager):
     def get_queryset(self):
