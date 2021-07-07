@@ -10,7 +10,7 @@ from .managers import CustomUserManager
 class CustomUser(AbstractUser):
     username = None
     email = models.EmailField(_('email address'), unique=True)
-    watched_list = models.ManyToManyField(Anime, blank=True)
+    watched_list = models.ManyToManyField(Anime, blank=True, related_name= 'animes')
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
