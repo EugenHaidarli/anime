@@ -1,6 +1,14 @@
 from django.contrib.auth.base_user import BaseUserManager
+from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.db.models import Count
+
+class CustomUserQuerySet(models.QuerySet):
+    def get_top_users(self):
+        return self.all().annotate(comment_count = Count('comments')).order_by('-comment_count')
+
+    def get_top_watched_anime(self):
+        return self.all().annotate(anime = Count('watched_list')).order_by('-anime')
 
 
 class CustomUserManager(BaseUserManager):
@@ -34,5 +42,8 @@ class CustomUserManager(BaseUserManager):
             raise ValueError(_('Superuser must have is_superuser=True.'))
         return self.create_user(email, password, **extra_fields)
 
+    def get_queryset(self):
+        return CustomUserQuerySet(self.model, using=self._db)
+
     def get_top_users(self):
-        return self.all().annotate(comment_count = Count('comments')).order_by('-comment_count')
+        return self.get_queryset().get_top_users()
